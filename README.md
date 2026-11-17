@@ -1,9 +1,8 @@
-# SIMTELE-WEB · Panel interactivo de prevención y monitoreo
+# SIMULACIÓN TELEFÉRICO - Panel interactivo de prevención y monitoreo
 
-Proyecto individual de **Programación Web I** — simulación educativa.
-No usa datos reales de Mi Teleférico; todos los umbrales son didácticos.
+Proyecto de **Programación Web I** — simulación Mi Teleférico.
 
-## 👤 Autora
+## 👤 Estudiante:
 - **Lima Lizárraga Sarah Elizabeth** — Desarrollo completo (HTML, CSS, JavaScript, validaciones y publicación).
 
 ## 🧩 Módulos implementados
@@ -17,10 +16,7 @@ No usa datos reales de Mi Teleférico; todos los umbrales son didácticos.
 2. Navega entre los módulos con el menú superior.
 3. Completa cada formulario y presiona su botón.
 4. Verde = éxito · Amarillo = advertencia · Rojo = error.
-5. Los registros se conservan al recargar gracias a `localStorage` (puntos extra).
+5. Los registros se conservan al recargar gracias a `localStorage`.
 
 ## 🛠️ Tecnologías
 HTML5 semántico · CSS3 (grid + media query) · JavaScript (DOM, arreglos de objetos, RegExp, `addEventListener`, `localStorage`).
-
-## ⚠️ Aviso
-Todos los umbrales son **didácticos** y forman parte de una simulación académica, no de límites operativos reales.
