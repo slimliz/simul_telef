@@ -1,0 +1,354 @@
+/* =========================================================
+   SIMTELE-WEB · Hoja de estilos
+   Paleta AZUL MARINO + 1 color por módulo + grid 2x2
+   ========================================================= */
+
+:root {
+  /* --- Azul marino base --- */
+  --marino-900: #061a35;   /* Casi negro azulado (footer, hover) */
+  --marino-800: #0a2540;   /* Cabecera y navegación */
+  --marino-700: #0f2f57;   /* Botones base, títulos */
+  --marino-500: #1b4a86;   /* Acento medio */
+  --marino-200: #cfdcf0;   /* Bordes suaves */
+  --marino-100: #e5eefb;   /* Fondos suaves */
+  --marino-050: #f3f7fd;   /* Fondo de página */
+
+  /* --- Colores por módulo (que combinan con marino) --- */
+  --mod-1: #1565c0;        /* Detención      → Azul eléctrico */
+  --mod-1-bg: #e3f0fd;
+  --mod-2: #00695c;        /* Mantenimiento  → Verde petróleo */
+  --mod-2-bg: #dff3ef;
+  --mod-3: #4a148c;        /* Viento         → Púrpura oscuro */
+  --mod-3-bg: #ece3f7;
+  --mod-4: #01579b;        /* Sensores       → Azul océano */
+  --mod-4-bg: #dceefb;
+
+  /* --- Estados --- */
+  --rojo: #c62828;
+  --amarillo: #f57f17;
+  --verde: #2e7d32;
+
+  /* --- Neutros --- */
+  --texto: #1f2933;
+  --borde: #cfd8e3;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  color: var(--texto);
+  background: var(--marino-050);
+  line-height: 1.5;
+}
+
+/* ---------- Cabecera (marino profundo con degradado) ---------- */
+.cabecera {
+  background: linear-gradient(135deg, var(--marino-900), var(--marino-700));
+  color: #fff;
+  padding: 20px 16px;
+  border-bottom: 4px solid var(--marino-500);
+}
+.cabecera-contenido {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.logo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 50%;
+  padding: 6px;
+  flex-shrink: 0;
+}
+.cabecera-texto h1 {
+  margin: 0 0 6px;
+  font-size: 1.8rem;
+  letter-spacing: 1.2px;
+}
+.cabecera-texto p {
+  margin: 0;
+  font-size: .9rem;
+  opacity: .95;
+}
+
+/* ---------- Navegación (marino con texto blanco) ---------- */
+.navegacion {
+  background: var(--marino-800);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(10, 37, 64, .25);
+}
+.navegacion ul {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+}
+.navegacion a {
+  display: block;
+  padding: 12px 14px;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: .92rem;
+  border-radius: 6px;
+  transition: background .2s, color .2s;
+}
+.navegacion a:hover,
+.navegacion a:focus {
+  background: var(--marino-500);
+  color: #fff;
+  outline: none;
+}
+
+/* ---------- Grid principal: 2 columnas en escritorio ---------- */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 22px 16px 40px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);   /* ← 2 arriba y 2 abajo */
+  gap: 22px;
+  align-items: start;
+}
+
+/* ---------- Tarjetas de módulo (base) ---------- */
+.modulo {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px 20px 22px;
+  box-shadow: 0 4px 16px rgba(10, 37, 64, .10);
+  border-top: 5px solid var(--marino-500);
+  scroll-margin-top: 75px;
+}
+.modulo h2 {
+  margin: 0 0 12px;
+  font-size: 1.15rem;
+  color: var(--marino-700);
+}
+
+/* ============ COLORES POR MÓDULO ============ */
+
+/* Módulo 1 · Detención → Azul eléctrico */
+#detencion {
+  border-top-color: var(--mod-1);
+  background: linear-gradient(180deg, var(--mod-1-bg) 0%, #fff 70px);
+}
+#detencion h2 { color: var(--mod-1); }
+#detencion button[type="submit"] { background: var(--mod-1); }
+#detencion button[type="submit"]:hover { background: #0d47a1; }
+
+/* Módulo 2 · Mantenimiento → Verde petróleo */
+#mantenimiento {
+  border-top-color: var(--mod-2);
+  background: linear-gradient(180deg, var(--mod-2-bg) 0%, #fff 70px);
+}
+#mantenimiento h2 { color: var(--mod-2); }
+#mantenimiento button[type="submit"] { background: var(--mod-2); }
+#mantenimiento button[type="submit"]:hover { background: #004d40; }
+
+/* Módulo 3 · Viento → Púrpura oscuro */
+#viento {
+  border-top-color: var(--mod-3);
+  background: linear-gradient(180deg, var(--mod-3-bg) 0%, #fff 70px);
+}
+#viento h2 { color: var(--mod-3); }
+#viento button[type="submit"] { background: var(--mod-3); }
+#viento button[type="submit"]:hover { background: #38006b; }
+
+/* Módulo 4 · Sensores → Azul océano */
+#sensores {
+  border-top-color: var(--mod-4);
+  background: linear-gradient(180deg, var(--mod-4-bg) 0%, #fff 70px);
+}
+#sensores h2 { color: var(--mod-4); }
+#sensores button[type="submit"] { background: var(--mod-4); }
+#sensores button[type="submit"]:hover { background: #013f6e; }
+
+/* ---------- Aviso de simulación ---------- */
+.aviso-simulacion {
+  background: #fff8e1;
+  border: 1px dashed var(--amarillo);
+  color: #6d4c00;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: .82rem;
+  margin: 0 0 14px;
+}
+
+/* ---------- Formularios ---------- */
+.campo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+label {
+  font-weight: 600;
+  font-size: .9rem;
+  margin-bottom: 4px;
+  color: var(--marino-800);
+}
+input, select {
+  padding: 9px 10px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  font-size: .95rem;
+  font-family: inherit;
+  background: #fff;
+  color: var(--texto);
+}
+input:focus, select:focus {
+  outline: 2px solid var(--marino-500);
+  border-color: var(--marino-500);
+}
+.ayuda {
+  color: #56697f;
+  font-size: .78rem;
+  margin-top: 4px;
+}
+
+/* ---------- Botones genéricos ---------- */
+button {
+  background: var(--marino-700);
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: .93rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  margin-top: 4px;
+  margin-right: 8px;
+  transition: background .2s;
+}
+button:hover { background: var(--marino-900); }
+
+button.secundario { background: #55657c; }
+button.secundario:hover { background: #3d4a5c; }
+
+button.btn-eliminar {
+  background: var(--rojo);
+  padding: 5px 10px;
+  font-size: .78rem;
+  margin: 0;
+}
+button.btn-eliminar:hover { background: #8e0000; }
+
+/* ---------- Mensajes ---------- */
+.mensaje {
+  margin-top: 14px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: .89rem;
+  border-left: 5px solid var(--marino-500);
+  background: var(--marino-100);
+  color: var(--marino-800);
+}
+.mensaje.ok     { background: #e6f4ea; border-color: var(--verde);    color: #1b5e20; }
+.mensaje.alerta { background: #fff4d6; border-color: var(--amarillo); color: #6d4c00; }
+.mensaje.error  { background: #fdecea; border-color: var(--rojo);     color: #8c1d18; }
+
+/* ---------- Tablas ---------- */
+.tabla-contenedor { overflow-x: auto; margin-top: 14px; }
+.tabla {
+  width: 100%;
+  min-width: 380px;
+  border-collapse: collapse;
+  font-size: .87rem;
+}
+.tabla th, .tabla td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--borde);
+  text-align: left;
+}
+.tabla thead th {
+  background: var(--marino-800);
+  color: #ffffff;
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+}
+.tabla tbody tr:hover { background: var(--marino-050); }
+.tabla .vacio {
+  text-align: center;
+  color: #7b8794;
+  font-style: italic;
+}
+
+/* ---------- Etiquetas de estado ---------- */
+.etiqueta {
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: .74rem;
+  font-weight: 700;
+  color: #fff;
+}
+.etiqueta.normal   { background: var(--verde); }
+.etiqueta.revision { background: var(--amarillo); color: #333; }
+.etiqueta.urgente  { background: var(--rojo); }
+
+/* ---------- Contadores ---------- */
+.contador {
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--marino-700);
+  margin: 12px 0 0;
+}
+
+/* ---------- Pie de página (marino profundo) ---------- */
+.pie {
+  background: var(--marino-900);
+  color: #e5eefb;
+  text-align: center;
+  padding: 18px 16px;
+  font-size: .85rem;
+  border-top: 4px solid var(--marino-500);
+}
+.pie p { margin: 4px 0; }
+
+/* =========================================================
+   DISEÑO ADAPTABLE
+   ========================================================= */
+
+/* Tablets y pantallas medianas */
+@media (max-width: 900px) {
+  main { gap: 16px; }
+  .modulo { padding: 16px 16px 20px; }
+}
+
+/* Celulares: 1 sola columna */
+@media (max-width: 720px) {
+  .cabecera { padding: 16px 12px; }
+  .cabecera-contenido { flex-direction: column; text-align: center; gap: 10px; }
+  .logo { width: 70px; height: 70px; }
+  .cabecera-texto h1 { font-size: 1.45rem; }
+  .cabecera-texto p { font-size: .85rem; }
+
+  .navegacion a { padding: 10px 9px; font-size: .8rem; }
+
+  main {
+    grid-template-columns: 1fr;   /* ← 1 columna en celular */
+    padding: 14px 10px 30px;
+    gap: 16px;
+  }
+
+  .modulo { padding: 14px 14px 18px; }
+
+  button { width: 100%; margin-right: 0; }
+  .tabla .btn-eliminar { width: auto; }
+
+  .tabla { font-size: .8rem; min-width: 340px; }
+}

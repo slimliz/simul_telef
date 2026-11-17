@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Panel educativo de simulación para la prevención y monitoreo de un sistema de transporte por cable.">
+  <title>SIMULACIÓN - MI TELEFÉRICO - Panel de prevención y monitoreo</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ================= CABECERA ================= -->
+  <header class="cabecera">
+    <div class="cabecera-contenido">
+        <img src="img/Empresa_Estatal_de_Transporte_por_Cable_Mi_Teleférico_Logo.svg.webp" alt="Logo de Mi Teleférico" class="logo">
+        <div class="cabecera-texto">
+                <h1>SIMULACIÓN - MI TELEFÉRICO</h1>
+                <p>Panel interactivo de prevención y monitoreo. </p>
+        </div>
+    </div>
+ </header>
+
+  <!-- ================= NAVEGACIÓN ================= -->
+  <nav class="navegacion" aria-label="Navegación principal">
+    <ul>
+      <li><a href="#detencion">1. Detención de emergencia</a></li>
+      <li><a href="#mantenimiento">2. Mantenimiento</a></li>
+      <li><a href="#viento">3. Viento y oscilación</a></li>
+      <li><a href="#sensores">4. Sensores</a></li>
+    </ul>
+  </nav>
+
+  <!-- ================= CONTENIDO PRINCIPAL ================= -->
+  <main>
+
+    <!-- ---------- MÓDULO 1: DETENCIÓN DE EMERGENCIA ---------- -->
+    <section id="detencion" class="modulo">
+      <h2>1. Detención de emergencia</h2>
+      <p class="aviso-simulacion">
+        ⚠️ Umbrales didácticos de simulación: menos de 30 m (controlado),
+        entre 30 y 60 m (precaución) y más de 60 m (alerta).
+      </p>
+
+      <form id="formDetencion" novalidate>
+        <div class="campo">
+          <label for="velocidad">Velocidad (km/h)</label>
+          <input type="text" id="velocidad" inputmode="decimal" placeholder="Ej.: 72">
+          <small class="ayuda">Solo números entre 0 y 120. Usa punto decimal (ej.: 72.5).</small>
+        </div>
+
+        <div class="campo">
+          <label for="tiempoReaccion">Tiempo de reacción (s)</label>
+          <input type="text" id="tiempoReaccion" inputmode="decimal" placeholder="Ej.: 3">
+          <small class="ayuda">Solo números entre 0 y 10 segundos.</small>
+        </div>
+
+        <button type="submit">Calcular distancia</button>
+      </form>
+
+      <div id="resultadoDetencion" class="mensaje info" role="status">
+        Todavía no se realizó ningún cálculo.
+      </div>
+    </section>
+
+    <!-- ---------- MÓDULO 2: MANTENIMIENTO ---------- -->
+    <section id="mantenimiento" class="modulo">
+      <h2>2. Mantenimiento de componentes</h2>
+      <p class="aviso-simulacion">⚠️ Registros ficticios con fines académicos.</p>
+
+      <form id="formMantenimiento" novalidate>
+        <div class="campo">
+          <label for="componente">Componente</label>
+          <input type="text" id="componente" placeholder="Ej.: Cable tractor">
+          <small class="ayuda">Mínimo 3 caracteres.</small>
+        </div>
+
+        <div class="campo">
+          <label for="horasUso">Horas de uso</label>
+          <input type="text" id="horasUso" inputmode="decimal" placeholder="Ej.: 120">
+          <small class="ayuda">Número entre 0 y 100000.</small>
+        </div>
+
+        <div class="campo">
+          <label for="estado">Estado</label>
+          <select id="estado">
+            <option value="normal">Normal</option>
+            <option value="revision">Revisión</option>
+            <option value="urgente">Urgente</option>
+          </select>
+        </div>
+
+        <button type="submit">Agregar registro</button>
+      </form>
+
+      <div id="mensajeMantenimiento" class="mensaje info" role="status"></div>
+
+      <div class="tabla-contenedor">
+        <table class="tabla">
+          <thead>
+            <tr>
+              <th>#</th><th>Componente</th><th>Horas de uso</th><th>Estado</th><th>Acción</th>
+            </tr>
+          </thead>
+          <tbody id="cuerpoMantenimiento"></tbody>
+        </table>
+      </div>
+
+      <p id="contadorMantenimiento" class="contador">Total de registros: 0</p>
+    </section>
+
+    <!-- ---------- MÓDULO 3: VIENTO Y OSCILACIÓN ---------- -->
+    <section id="viento" class="modulo">
+      <h2>3. Viento y oscilación</h2>
+      <p class="aviso-simulacion">
+        ⚠️ Clasificación didáctica. Registra exactamente 5 mediciones simuladas (km/h).
+      </p>
+
+      <form id="formViento" novalidate>
+        <div class="campo">
+          <label for="medicionViento">Medición de viento (km/h)</label>
+          <input type="text" id="medicionViento" inputmode="decimal" placeholder="Ej.: 30">
+          <small class="ayuda">Número entre 0 y 150.</small>
+        </div>
+
+        <button type="submit">Agregar medición</button>
+        <button type="button" id="btnReiniciarViento" class="secundario">Reiniciar mediciones</button>
+      </form>
+
+      <p id="progresoViento" class="contador">Mediciones registradas: 0 de 5</p>
+      <div id="resultadoViento" class="mensaje info" role="status"></div>
+    </section>
+
+    <!-- ---------- MÓDULO 4: SENSORES ---------- -->
+    <section id="sensores" class="modulo">
+      <h2>4. Sensores</h2>
+      <p class="aviso-simulacion">⚠️ Lecturas simuladas. El código debe cumplir el formato SEN-000.</p>
+
+      <form id="formSensores" novalidate>
+        <div class="campo">
+          <label for="codigoSensor">Código del sensor</label>
+          <input type="text" id="codigoSensor" placeholder="Ej.: SEN-001">
+          <small class="ayuda">Formato obligatorio: <code>SEN-</code> + 3 dígitos (SEN-001).</small>
+        </div>
+
+        <div class="campo">
+          <label for="tipoSensor">Tipo de sensor</label>
+          <select id="tipoSensor">
+            <option value="Temperatura">Temperatura</option>
+            <option value="Vibración">Vibración</option>
+            <option value="Viento">Viento</option>
+            <option value="Peso">Peso</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="lecturaSensor">Lectura</label>
+          <input type="text" id="lecturaSensor" inputmode="decimal" placeholder="Ej.: 24.5">
+          <small class="ayuda">Valor numérico entre -100 y 1000.</small>
+        </div>
+
+        <button type="submit">Registrar sensor</button>
+      </form>
+
+      <div id="mensajeSensores" class="mensaje info" role="status"></div>
+
+      <div class="tabla-contenedor">
+        <table class="tabla">
+          <thead>
+            <tr>
+              <th>#</th><th>Código</th><th>Tipo</th><th>Lectura</th><th>Acción</th>
+            </tr>
+          </thead>
+          <tbody id="cuerpoSensores"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= PIE DE PÁGINA ================= -->
+  <footer class="pie">
+    <p>Lima Lizárraga Sarah Elizabeth</p>
+    <p>Desafío Simulación - Mi Teleférico</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
