@@ -352,3 +352,39 @@ button.btn-eliminar:hover { background: #8e0000; }
 
   .tabla { font-size: .8rem; min-width: 340px; }
 }
+
+/* =========================================================
+   FIX · Que la página quepa en el celular (sin cortes)
+   ========================================================= */
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+.modulo {
+  min-width: 0;   /* ← la clave: permite que las tarjetas se encojan */
+}
+
+.tabla-contenedor {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tabla {
+  width: 100%;
+  min-width: 340px;
+  table-layout: fixed;
+  word-wrap: break-word;
+}
+
+img, input, select, button {
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  main { padding-left: 8px; padding-right: 8px; }
+  .modulo { padding: 14px 12px; }
+  .cabecera-contenido { flex-wrap: wrap; }
+}
