@@ -1,34 +1,21 @@
-/* =========================================================
-   SIMTELE-WEB · Hoja de estilos
-   Paleta AZUL MARINO + 1 color por módulo + grid 2x2
-   ========================================================= */
 
 :root {
-  /* --- Azul marino base --- */
-  --marino-900: #061a35;   /* Casi negro azulado (footer, hover) */
-  --marino-800: #0a2540;   /* Cabecera y navegación */
-  --marino-700: #0f2f57;   /* Botones base, títulos */
-  --marino-500: #1b4a86;   /* Acento medio */
-  --marino-200: #cfdcf0;   /* Bordes suaves */
-  --marino-100: #e5eefb;   /* Fondos suaves */
-  --marino-050: #f3f7fd;   /* Fondo de página */
+  --marino-900: #061a35;
+  --marino-800: #0a2540;
+  --marino-700: #0f2f57;
+  --marino-500: #1b4a86;
+  --marino-200: #cfdcf0;
+  --marino-100: #e5eefb;
+  --marino-050: #f3f7fd;
 
-  /* --- Colores por módulo (que combinan con marino) --- */
-  --mod-1: #1565c0;        /* Detención      → Azul eléctrico */
-  --mod-1-bg: #e3f0fd;
-  --mod-2: #00695c;        /* Mantenimiento  → Verde petróleo */
-  --mod-2-bg: #dff3ef;
-  --mod-3: #4a148c;        /* Viento         → Púrpura oscuro */
-  --mod-3-bg: #ece3f7;
-  --mod-4: #01579b;        /* Sensores       → Azul océano */
-  --mod-4-bg: #dceefb;
+  --mod-1: #1565c0;  --mod-1-bg: #e3f0fd;
+  --mod-2: #00695c;  --mod-2-bg: #dff3ef;
+  --mod-3: #4a148c;  --mod-3-bg: #ece3f7;
+  --mod-4: #01579b;  --mod-4-bg: #dceefb;
 
-  /* --- Estados --- */
   --rojo: #c62828;
   --amarillo: #f57f17;
   --verde: #2e7d32;
-
-  /* --- Neutros --- */
   --texto: #1f2933;
   --borde: #cfd8e3;
 }
@@ -44,7 +31,7 @@ body {
   line-height: 1.5;
 }
 
-/* ---------- Cabecera (marino profundo con degradado) ---------- */
+/* ---------- CABECERA ---------- */
 .cabecera {
   background: linear-gradient(135deg, var(--marino-900), var(--marino-700));
   color: #fff;
@@ -59,8 +46,7 @@ body {
   gap: 18px;
 }
 .logo {
-  width: 60px;
-  height: 60px;
+  width: 60px; height: 60px;
   object-fit: contain;
   background: #fff;
   border-radius: 50%;
@@ -77,8 +63,20 @@ body {
   font-size: .9rem;
   opacity: .95;
 }
+.btn-logout {
+  background: rgba(255,255,255,.15) !important;
+  border: 1px solid rgba(255,255,255,.35) !important;
+  padding: 8px 14px !important;
+  font-size: .82rem !important;
+  margin: 0 0 0 auto !important;
+  align-self: center;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.btn-logout:hover { background: rgba(255,255,255,.28) !important; }
 
-/* ---------- Navegación (marino con texto blanco) ---------- */
+/* ---------- NAVEGACIÓN ---------- */
 .navegacion {
   background: var(--marino-800);
   position: sticky;
@@ -104,27 +102,76 @@ body {
   font-weight: 600;
   font-size: .92rem;
   border-radius: 6px;
-  transition: background .2s, color .2s;
+  transition: background .2s;
 }
 .navegacion a:hover,
 .navegacion a:focus {
   background: var(--marino-500);
-  color: #fff;
   outline: none;
 }
 
-/* ---------- Grid principal: 2 columnas en escritorio ---------- */
+/* ---------- BARRA DE SESIÓN ---------- */
+.barra-sesion {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  background: #061a35;
+  color: #cfdcf0;
+  padding: 8px 16px;
+  font-family: "Consolas", "Courier New", monospace;
+  font-size: .8rem;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.barra-sesion.oculto { display: none; }
+.barra-sesion strong { color: #ffffff; }
+
+/* ---------- PANEL DE RESUMEN ---------- */
+.panel-resumen {
+  background: #061a35;
+  color: #cfdcf0;
+  padding: 12px 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+  border-bottom: 2px solid #1b4a86;
+}
+.resumen-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 8px;
+  padding: 8px 6px;
+}
+.resumen-label {
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  opacity: .75;
+}
+.resumen-valor {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffffff;
+  font-family: "Consolas", monospace;
+}
+.resumen-valor.alerta { color: #ffb74d; }
+.resumen-valor.ok     { color: #66bb6a; }
+
+/* ---------- GRID PRINCIPAL ---------- */
 main {
   max-width: 1100px;
   margin: 0 auto;
   padding: 22px 16px 40px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);   /* ← 2 arriba y 2 abajo */
+  grid-template-columns: repeat(2, 1fr);
   gap: 22px;
   align-items: start;
 }
 
-/* ---------- Tarjetas de módulo (base) ---------- */
+/* ---------- MÓDULOS ---------- */
 .modulo {
   background: #fff;
   border-radius: 12px;
@@ -139,45 +186,43 @@ main {
   color: var(--marino-700);
 }
 
-/* ============ COLORES POR MÓDULO ============ */
-
-/* Módulo 1 · Detención → Azul eléctrico */
-#detencion {
-  border-top-color: var(--mod-1);
-  background: linear-gradient(180deg, var(--mod-1-bg) 0%, #fff 70px);
-}
-#detencion h2 { color: var(--mod-1); }
+#detencion      { border-top-color: var(--mod-1); background: linear-gradient(180deg, var(--mod-1-bg) 0%, #fff 70px); }
+#detencion h2   { color: var(--mod-1); }
 #detencion button[type="submit"] { background: var(--mod-1); }
 #detencion button[type="submit"]:hover { background: #0d47a1; }
 
-/* Módulo 2 · Mantenimiento → Verde petróleo */
-#mantenimiento {
-  border-top-color: var(--mod-2);
-  background: linear-gradient(180deg, var(--mod-2-bg) 0%, #fff 70px);
-}
-#mantenimiento h2 { color: var(--mod-2); }
+#mantenimiento      { border-top-color: var(--mod-2); background: linear-gradient(180deg, var(--mod-2-bg) 0%, #fff 70px); }
+#mantenimiento h2   { color: var(--mod-2); }
 #mantenimiento button[type="submit"] { background: var(--mod-2); }
 #mantenimiento button[type="submit"]:hover { background: #004d40; }
 
-/* Módulo 3 · Viento → Púrpura oscuro */
-#viento {
-  border-top-color: var(--mod-3);
-  background: linear-gradient(180deg, var(--mod-3-bg) 0%, #fff 70px);
-}
-#viento h2 { color: var(--mod-3); }
+#viento      { border-top-color: var(--mod-3); background: linear-gradient(180deg, var(--mod-3-bg) 0%, #fff 70px); }
+#viento h2   { color: var(--mod-3); }
 #viento button[type="submit"] { background: var(--mod-3); }
 #viento button[type="submit"]:hover { background: #38006b; }
 
-/* Módulo 4 · Sensores → Azul océano */
-#sensores {
-  border-top-color: var(--mod-4);
-  background: linear-gradient(180deg, var(--mod-4-bg) 0%, #fff 70px);
-}
-#sensores h2 { color: var(--mod-4); }
+#sensores      { border-top-color: var(--mod-4); background: linear-gradient(180deg, var(--mod-4-bg) 0%, #fff 70px); }
+#sensores h2   { color: var(--mod-4); }
 #sensores button[type="submit"] { background: var(--mod-4); }
 #sensores button[type="submit"]:hover { background: #013f6e; }
 
-/* ---------- Aviso de simulación ---------- */
+/* ---------- INDICADORES ---------- */
+.indicador {
+  display: inline-block;
+  font-size: .7rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-left: 8px;
+  vertical-align: middle;
+  letter-spacing: .3px;
+}
+.indicador.sin-datos { background: #e0e6ed; color: #5b6b7c; }
+.indicador.ok        { background: #e6f4ea; color: #1b5e20; }
+.indicador.alerta    { background: #fff4d6; color: #6d4c00; }
+.indicador.error     { background: #fdecea; color: #8c1d18; }
+
+/* ---------- AVISO ---------- */
 .aviso-simulacion {
   background: #fff8e1;
   border: 1px dashed var(--amarillo);
@@ -188,12 +233,8 @@ main {
   margin: 0 0 14px;
 }
 
-/* ---------- Formularios ---------- */
-.campo {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 12px;
-}
+/* ---------- FORMULARIOS ---------- */
+.campo { display: flex; flex-direction: column; margin-bottom: 12px; }
 label {
   font-weight: 600;
   font-size: .9rem;
@@ -213,13 +254,9 @@ input:focus, select:focus {
   outline: 2px solid var(--marino-500);
   border-color: var(--marino-500);
 }
-.ayuda {
-  color: #56697f;
-  font-size: .78rem;
-  margin-top: 4px;
-}
+.ayuda { color: #56697f; font-size: .78rem; margin-top: 4px; }
 
-/* ---------- Botones genéricos ---------- */
+/* ---------- BOTONES ---------- */
 button {
   background: var(--marino-700);
   color: #fff;
@@ -235,10 +272,8 @@ button {
   transition: background .2s;
 }
 button:hover { background: var(--marino-900); }
-
 button.secundario { background: #55657c; }
 button.secundario:hover { background: #3d4a5c; }
-
 button.btn-eliminar {
   background: var(--rojo);
   padding: 5px 10px;
@@ -247,7 +282,7 @@ button.btn-eliminar {
 }
 button.btn-eliminar:hover { background: #8e0000; }
 
-/* ---------- Mensajes ---------- */
+/* ---------- MENSAJES ---------- */
 .mensaje {
   margin-top: 14px;
   padding: 10px 12px;
@@ -261,7 +296,7 @@ button.btn-eliminar:hover { background: #8e0000; }
 .mensaje.alerta { background: #fff4d6; border-color: var(--amarillo); color: #6d4c00; }
 .mensaje.error  { background: #fdecea; border-color: var(--rojo);     color: #8c1d18; }
 
-/* ---------- Tablas ---------- */
+/* ---------- TABLAS ---------- */
 .tabla-contenedor { overflow-x: auto; margin-top: 14px; }
 .tabla {
   width: 100%;
@@ -288,7 +323,7 @@ button.btn-eliminar:hover { background: #8e0000; }
   font-style: italic;
 }
 
-/* ---------- Etiquetas de estado ---------- */
+/* ---------- ETIQUETAS ---------- */
 .etiqueta {
   padding: 3px 9px;
   border-radius: 999px;
@@ -300,7 +335,7 @@ button.btn-eliminar:hover { background: #8e0000; }
 .etiqueta.revision { background: var(--amarillo); color: #333; }
 .etiqueta.urgente  { background: var(--rojo); }
 
-/* ---------- Contadores ---------- */
+/* ---------- CONTADORES ---------- */
 .contador {
   font-size: .85rem;
   font-weight: 700;
@@ -308,7 +343,93 @@ button.btn-eliminar:hover { background: #8e0000; }
   margin: 12px 0 0;
 }
 
-/* ---------- Pie de página (marino profundo) ---------- */
+/* ---------- LOG DE EVENTOS ---------- */
+.modulo-log { grid-column: 1 / -1; }
+.lista-eventos {
+  list-style: none;
+  margin: 0;
+  padding: 8px 12px;
+  max-height: 220px;
+  overflow-y: auto;
+  font-family: "Consolas", "Courier New", monospace;
+  font-size: .82rem;
+  background: #0a2540;
+  border-radius: 8px;
+}
+.lista-eventos .evento {
+  display: flex;
+  gap: 10px;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  color: #cfdcf0;
+}
+.lista-eventos .evento:last-child { border-bottom: none; }
+.lista-eventos .ev-hora { color: #64b5f6; flex-shrink: 0; }
+.lista-eventos .evento.ok     .ev-msg { color: #66bb6a; }
+.lista-eventos .evento.alerta .ev-msg { color: #ffb74d; }
+.lista-eventos .evento.error  .ev-msg { color: #ef5350; }
+.lista-eventos .evento.info   .ev-msg { color: #90caf9; }
+.lista-eventos .vacio-log {
+  color: #8899aa;
+  font-style: italic;
+  padding: 6px 0;
+}
+
+/* ---------- LOGIN ---------- */
+.login-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top, #0f2f57, #061a35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 16px;
+  overflow-y: auto;
+}
+.login-overlay.oculto { display: none; }
+.login-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 28px 26px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0,0,0,.45);
+  text-align: center;
+  border-top: 5px solid #1b4a86;
+}
+.login-logo { font-size: 3rem; line-height: 1; }
+.login-card h2 {
+  margin: 6px 0 4px;
+  color: #0a2540;
+  font-size: 1.4rem;
+  letter-spacing: 1.5px;
+}
+.login-sub { color: #56697f; font-size: .85rem; margin: 0 0 20px; }
+.login-card .campo { text-align: left; }
+.login-card input { width: 100%; }
+.login-card button[type="submit"] {
+  width: 100%;
+  margin: 8px 0 0;
+  background: #0a2540;
+}
+.login-card button[type="submit"]:hover { background: #061a35; }
+.login-card .mensaje { display: none; margin-top: 12px; }
+.login-card .mensaje.visible { display: block; }
+.login-hint {
+  margin-top: 20px;
+  font-size: .75rem;
+  color: #8899aa;
+}
+.login-hint code {
+  background: #eef3f8;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: .72rem;
+  color: #0a2540;
+}
+
+/* ---------- PIE ---------- */
 .pie {
   background: var(--marino-900);
   color: #e5eefb;
@@ -320,71 +441,105 @@ button.btn-eliminar:hover { background: #8e0000; }
 .pie p { margin: 4px 0; }
 
 /* =========================================================
-   DISEÑO ADAPTABLE
+   FIX MÓVIL BLINDADO
    ========================================================= */
-
-/* Tablets y pantallas medianas */
-@media (max-width: 900px) {
-  main { gap: 16px; }
-  .modulo { padding: 16px 16px 20px; }
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
 }
-
-/* Celulares: 1 sola columna */
-@media (max-width: 720px) {
-  .cabecera { padding: 16px 12px; }
-  .cabecera-contenido { flex-direction: column; text-align: center; gap: 10px; }
-  .logo { width: 70px; height: 70px; }
-  .cabecera-texto h1 { font-size: 1.45rem; }
-  .cabecera-texto p { font-size: .85rem; }
-
-  .navegacion a { padding: 10px 9px; font-size: .8rem; }
-
-  main {
-    grid-template-columns: 1fr;   /* ← 1 columna en celular */
-    padding: 14px 10px 30px;
-    gap: 16px;
-  }
-
-  .modulo { padding: 14px 14px 18px; }
-
-  button { width: 100%; margin-right: 0; }
-  .tabla .btn-eliminar { width: auto; }
-
-  .tabla { font-size: .8rem; min-width: 340px; }
+main {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+.modulo {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+.modulo * {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+img, input, select, button, textarea {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+.tabla-contenedor {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+.tabla {
+  width: 100% !important;
+  table-layout: fixed !important;
+  word-wrap: break-word !important;
+}
+.cabecera, .navegacion, .pie {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+.cabecera-contenido {
+  flex-wrap: wrap !important;
+  max-width: 100% !important;
 }
 
 /* =========================================================
-   FIX · Que la página quepa en el celular (sin cortes)
+   MEDIA QUERIES
    ========================================================= */
-
-html, body {
-  overflow-x: hidden;
-  max-width: 100%;
-}
-
-.modulo {
-  min-width: 0;   /* ← la clave: permite que las tarjetas se encojan */
-}
-
-.tabla-contenedor {
-  max-width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.tabla {
-  width: 100%;
-  min-width: 340px;
-  table-layout: fixed;
-  word-wrap: break-word;
-}
-
-img, input, select, button {
-  max-width: 100%;
+@media (max-width: 900px) {
+  main { gap: 16px !important; }
+  .modulo { padding: 16px 16px 20px !important; }
 }
 
 @media (max-width: 720px) {
-  main { padding-left: 8px; padding-right: 8px; }
-  .modulo { padding: 14px 12px; }
-  .cabecera-contenido { flex-wrap: wrap; }
+  .cabecera { padding: 16px 12px !important; }
+  .cabecera-contenido {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 10px !important;
+  }
+  .logo { width: 70px !important; height: 70px !important; }
+  .cabecera-texto h1 { font-size: 1.45rem !important; }
+  .cabecera-texto p { font-size: .85rem !important; }
+  .btn-logout { margin: 8px auto 0 !important; }
+
+  .navegacion a { padding: 10px 9px !important; font-size: .8rem !important; }
+
+  main {
+    grid-template-columns: 1fr !important;
+    padding: 12px 8px 30px !important;
+    gap: 14px !important;
+  }
+  .modulo { padding: 14px 12px !important; }
+
+  button { width: 100% !important; margin-right: 0 !important; }
+  .tabla .btn-eliminar { width: auto !important; }
+
+  .tabla {
+    min-width: 0 !important;
+    font-size: .8rem !important;
+  }
+
+  .panel-resumen { padding: 8px !important; gap: 6px !important; }
+  .resumen-valor { font-size: 1.05rem !important; }
+  .resumen-label { font-size: .62rem !important; }
+  .indicador { display: block !important; margin: 6px 0 0 !important; font-size: .65rem !important; width: fit-content !important; }
+  .lista-eventos { font-size: .75rem !important; max-height: 180px !important; }
+  .barra-sesion {
+    justify-content: center !important;
+    font-size: .72rem !important;
+    padding: 6px 10px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-card { padding: 22px 18px !important; }
+  .login-logo { font-size: 2.4rem !important; }
+  .login-card h2 { font-size: 1.2rem !important; }
 }
