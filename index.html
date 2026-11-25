@@ -4,21 +4,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Panel educativo de simulación para la prevención y monitoreo de un sistema de transporte por cable.">
-  <title>SIMULACIÓN - MI TELEFÉRICO - Panel de prevención y monitoreo</title>
+  <title>SIMULACIÓN MI TELEFÉRICO | Panel de prevención y monitoreo</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
+  <!-- ================= PANTALLA DE LOGIN ================= -->
+  <div id="pantallaLogin" class="login-overlay">
+    <div class="login-card">
+      <div class="login-logo">🚡</div>
+      <h2>SIMULACIÓN MI TELEFÉRICO</h2>
+      <p class="login-sub">Panel de control · Acceso restringido</p>
+      <form id="formLogin" novalidate>
+        <div class="campo">
+          <label for="usuario">Usuario</label>
+          <input type="text" id="usuario" autocomplete="username" placeholder="operador">
+        </div>
+        <div class="campo">
+          <label for="clave">Contraseña</label>
+          <input type="password" id="clave" autocomplete="current-password" placeholder="••••••••">
+        </div>
+        <div id="mensajeLogin" class="mensaje" role="alert"></div>
+        <button type="submit">Ingresar al panel</button>
+      </form>
+      <p class="login-hint">
+        Demo académica · Usuario: <code>operador</code> · Contraseña: <code>simtele2024</code>
+      </p>
+    </div>
+  </div>
+
   <!-- ================= CABECERA ================= -->
   <header class="cabecera">
     <div class="cabecera-contenido">
-        <img src="img/Empresa_Estatal_de_Transporte_por_Cable_Mi_Teleférico_Logo.svg.webp" alt="Logo de Mi Teleférico" class="logo">
-        <div class="cabecera-texto">
-                <h1>SIMULACIÓN - MI TELEFÉRICO</h1>
-                <p>Panel interactivo de prevención y monitoreo. </p>
-        </div>
+      <img src="img/logo.svg" alt="Logo de Mi Teleférico de Bolivia" class="logo">
+      <div class="cabecera-texto">
+        <h1>SIMULACIÓN MI TELEFÉRICO</h1>
+        <p>Panel interactivo de prevención y monitoreo ·
+    </p>
+      </div>
+      <button type="button" id="btnLogout" class="btn-logout">Cerrar sesión</button>
     </div>
- </header>
+  </header>
 
   <!-- ================= NAVEGACIÓN ================= -->
   <nav class="navegacion" aria-label="Navegación principal">
@@ -30,56 +56,76 @@
     </ul>
   </nav>
 
+  <!-- ================= BARRA DE SESIÓN ================= -->
+  <div id="barraSesion" class="barra-sesion oculto">
+    <span>🟢 Sesión activa</span>
+    <span>👤 Operador: <strong id="usuarioActivo">—</strong></span>
+    <span id="relojSesion">⏱ --:--:--</span>
+  </div>
+
+  <!-- ================= PANEL DE RESUMEN ================= -->
+  <div class="panel-resumen" id="panelResumen">
+    <div class="resumen-item">
+      <span class="resumen-label">Registros</span>
+      <span id="resumenRegistros" class="resumen-valor">0</span>
+    </div>
+    <div class="resumen-item">
+      <span class="resumen-label">Alertas</span>
+      <span id="resumenAlertas" class="resumen-valor">0</span>
+    </div>
+    <div class="resumen-item">
+      <span class="resumen-label">Viento prom.</span>
+      <span id="resumenViento" class="resumen-valor">—</span>
+    </div>
+    <div class="resumen-item">
+      <span class="resumen-label">Sensores</span>
+      <span id="resumenSensores" class="resumen-valor">0</span>
+    </div>
+  </div>
+
   <!-- ================= CONTENIDO PRINCIPAL ================= -->
   <main>
 
-    <!-- ---------- MÓDULO 1: DETENCIÓN DE EMERGENCIA ---------- -->
+    <!-- MÓDULO 1 -->
     <section id="detencion" class="modulo">
-      <h2>1. Detención de emergencia</h2>
+      <h2>1. Detención de emergencia <span id="indicador-detencion" class="indicador sin-datos">● Sin datos</span></h2>
       <p class="aviso-simulacion">
         ⚠️ Umbrales didácticos de simulación: menos de 30 m (controlado),
         entre 30 y 60 m (precaución) y más de 60 m (alerta).
       </p>
-
       <form id="formDetencion" novalidate>
         <div class="campo">
           <label for="velocidad">Velocidad (km/h)</label>
           <input type="text" id="velocidad" inputmode="decimal" placeholder="Ej.: 72">
-          <small class="ayuda">Solo números entre 0 y 120. Usa punto decimal (ej.: 72.5).</small>
+          <small class="ayuda">Solo números entre 0 y 120. Usa punto decimal.</small>
         </div>
-
         <div class="campo">
           <label for="tiempoReaccion">Tiempo de reacción (s)</label>
           <input type="text" id="tiempoReaccion" inputmode="decimal" placeholder="Ej.: 3">
           <small class="ayuda">Solo números entre 0 y 10 segundos.</small>
         </div>
-
         <button type="submit">Calcular distancia</button>
       </form>
-
       <div id="resultadoDetencion" class="mensaje info" role="status">
         Todavía no se realizó ningún cálculo.
       </div>
     </section>
 
-    <!-- ---------- MÓDULO 2: MANTENIMIENTO ---------- -->
+    <!-- MÓDULO 2 -->
     <section id="mantenimiento" class="modulo">
-      <h2>2. Mantenimiento de componentes</h2>
+      <h2>2. Mantenimiento <span id="indicador-mantenimiento" class="indicador sin-datos">● Sin registros</span></h2>
       <p class="aviso-simulacion">⚠️ Registros ficticios con fines académicos.</p>
-
       <form id="formMantenimiento" novalidate>
         <div class="campo">
           <label for="componente">Componente</label>
           <input type="text" id="componente" placeholder="Ej.: Cable tractor">
           <small class="ayuda">Mínimo 3 caracteres.</small>
         </div>
-
         <div class="campo">
           <label for="horasUso">Horas de uso</label>
           <input type="text" id="horasUso" inputmode="decimal" placeholder="Ej.: 120">
           <small class="ayuda">Número entre 0 y 100000.</small>
         </div>
-
         <div class="campo">
           <label for="estado">Estado</label>
           <select id="estado">
@@ -88,12 +134,9 @@
             <option value="urgente">Urgente</option>
           </select>
         </div>
-
         <button type="submit">Agregar registro</button>
       </form>
-
       <div id="mensajeMantenimiento" class="mensaje info" role="status"></div>
-
       <div class="tabla-contenedor">
         <table class="tabla">
           <thead>
@@ -104,44 +147,38 @@
           <tbody id="cuerpoMantenimiento"></tbody>
         </table>
       </div>
-
       <p id="contadorMantenimiento" class="contador">Total de registros: 0</p>
     </section>
 
-    <!-- ---------- MÓDULO 3: VIENTO Y OSCILACIÓN ---------- -->
+    <!-- MÓDULO 3 -->
     <section id="viento" class="modulo">
-      <h2>3. Viento y oscilación</h2>
+      <h2>3. Viento y oscilación <span id="indicador-viento" class="indicador sin-datos">● Sin mediciones</span></h2>
       <p class="aviso-simulacion">
         ⚠️ Clasificación didáctica. Registra exactamente 5 mediciones simuladas (km/h).
       </p>
-
       <form id="formViento" novalidate>
         <div class="campo">
           <label for="medicionViento">Medición de viento (km/h)</label>
           <input type="text" id="medicionViento" inputmode="decimal" placeholder="Ej.: 30">
           <small class="ayuda">Número entre 0 y 150.</small>
         </div>
-
         <button type="submit">Agregar medición</button>
         <button type="button" id="btnReiniciarViento" class="secundario">Reiniciar mediciones</button>
       </form>
-
       <p id="progresoViento" class="contador">Mediciones registradas: 0 de 5</p>
       <div id="resultadoViento" class="mensaje info" role="status"></div>
     </section>
 
-    <!-- ---------- MÓDULO 4: SENSORES ---------- -->
+    <!-- MÓDULO 4 -->
     <section id="sensores" class="modulo">
-      <h2>4. Sensores</h2>
+      <h2>4. Sensores <span id="indicador-sensores" class="indicador sin-datos">● Sin sensores</span></h2>
       <p class="aviso-simulacion">⚠️ Lecturas simuladas. El código debe cumplir el formato SEN-000.</p>
-
       <form id="formSensores" novalidate>
         <div class="campo">
           <label for="codigoSensor">Código del sensor</label>
           <input type="text" id="codigoSensor" placeholder="Ej.: SEN-001">
-          <small class="ayuda">Formato obligatorio: <code>SEN-</code> + 3 dígitos (SEN-001).</small>
+          <small class="ayuda">Formato obligatorio: SEN- + 3 dígitos (SEN-001).</small>
         </div>
-
         <div class="campo">
           <label for="tipoSensor">Tipo de sensor</label>
           <select id="tipoSensor">
@@ -151,18 +188,14 @@
             <option value="Peso">Peso</option>
           </select>
         </div>
-
         <div class="campo">
           <label for="lecturaSensor">Lectura</label>
           <input type="text" id="lecturaSensor" inputmode="decimal" placeholder="Ej.: 24.5">
           <small class="ayuda">Valor numérico entre -100 y 1000.</small>
         </div>
-
         <button type="submit">Registrar sensor</button>
       </form>
-
       <div id="mensajeSensores" class="mensaje info" role="status"></div>
-
       <div class="tabla-contenedor">
         <table class="tabla">
           <thead>
@@ -173,6 +206,14 @@
           <tbody id="cuerpoSensores"></tbody>
         </table>
       </div>
+    </section>
+
+    <!-- HISTORIAL DE EVENTOS -->
+    <section id="log" class="modulo modulo-log">
+      <h2>📋 Historial de eventos</h2>
+      <ul id="listaEventos" class="lista-eventos">
+        <li class="vacio-log">Sin eventos todavía. Realiza una acción en cualquier módulo.</li>
+      </ul>
     </section>
 
   </main>
